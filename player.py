@@ -53,6 +53,11 @@ class Player:
         return self.stations
 
     def add_station_to_favorites(self, station: Station):
+        stations = self.read_favorites()
+
+        if station in stations:
+            raise ValueError("La radio ya está en la lista de favoritos")
+
         with open("db/favorites.db", "a+") as file:
             file.write(json.dumps(station.to_json()))
             file.write("\n")
