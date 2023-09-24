@@ -21,7 +21,7 @@ class Player:
 
     def play(self, station: Station):
         self.process = Popen(
-            ["ffplay", "-nodisp", "-nostats", "-loglevel", "0", "-volume", "10", station.url],
+            ["ffplay", "-nodisp", "-nostats", "-loglevel", "0", "-volume", str(self.volume), station.url],
             shell=False,
         )
         self.last_station = station
@@ -40,7 +40,14 @@ class Player:
         self.discoverer = discoverer
 
     def set_volume(self, volume: int):
+        if volume < 0 or volume > 100:
+            raise ValueError("Volume must be between 0 to 100")
+
         self.volume = volume
+
+        if self.last_station:
+            self.stop()
+            self.play(self.last_station)
 
     def get_stations(self):
         return self.stations

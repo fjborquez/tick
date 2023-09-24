@@ -1,5 +1,4 @@
 import time
-from pprint import pprint
 
 import questionary
 from pyradios import RadioBrowser
@@ -109,6 +108,10 @@ def main():
 
                 if station_selected == "Quitar de favoritos":
                     pass
+
+        if selected == "Cambiar volumen":
+            volume = questionary.text("Ingresa el nuevo volumen").ask()
+            app.player.set_volume(int(volume))
 
         if selected == "Detener":
             app.stop()
