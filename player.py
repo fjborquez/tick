@@ -74,4 +74,17 @@ class Player:
                 favorites.append(station)
             return favorites
 
+    def remove_station_from_favorites(self, station: Station):
+        stations = self.read_favorites()
+
+        if station not in stations:
+            raise ValueError("La radio no está en la lista de favoritos")
+
+        stations.remove(station)
+
+        with open("db/favorites.db", "w") as file:
+            for to_add in stations:
+                file.write(json.dumps(to_add.to_json()))
+                file.write("\n")
+            file.close()
 

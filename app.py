@@ -107,7 +107,7 @@ def main():
                     app.play(selected_station)
 
                 if station_selected == "Quitar de favoritos":
-                    pass
+                    app.player.remove_station_from_favorites(selected_station)
 
         if selected == "Cambiar volumen":
             volume = questionary.text("Ingresa el nuevo volumen").ask()
