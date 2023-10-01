@@ -19,19 +19,6 @@ class App:
         self.player = Player(api_client=self.api_client)
         self.stations = []
 
-    def simulate(self):
-        print(self.player.get_stations())
-        discoverer: Discoverable = DiscovererByCountry()
-        self.player.set_discoverer(discoverer)
-        self.player.discover("GB")
-        for station in self.player.get_stations():
-            if station.uuid == "624aff3e-2de1-4dde-b98f-6c1e8964345e":
-                selected_station = station
-            print(station.name + " - (" + station.uuid + ") - " + station.url)
-        self.player.play(selected_station)
-        time.sleep(30)
-        self.player.stop()
-
     def search_stations(self, discoverer: Discoverable, a_word: str):
         self.player.set_discoverer(discoverer)
         self.player.discover(a_word)
